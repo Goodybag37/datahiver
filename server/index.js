@@ -59,7 +59,7 @@ app.use(cors());
 app.use(
   "/api", // Adjust this path based on your needs
   createProxyMiddleware({
-    target: "http://localhost:3001", // Replace with the actual port of your React development server
+    target: "https://datahiver-production.up.railway.app", // Replace with the actual port of your React development server
     changeOrigin: true,
   })
 );
@@ -101,7 +101,7 @@ let transporter = nodemailer.createTransport({
   },
 });
 
-const port = 5000;
+const port = process.env.PORT || 5000;
 const saltRounds = 10;
 
 app.use(passport.initialize());
