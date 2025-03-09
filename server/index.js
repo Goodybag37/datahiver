@@ -56,13 +56,6 @@ const pool = new pg.Pool({
 const server = http.createServer(app);
 app.use(cors());
 // app.use(compression());
-app.use(
-  "/api", // Adjust this path based on your needs
-  createProxyMiddleware({
-    target: "https://datahiver-production.up.railway.app", // Replace with the actual port of your React development server
-    changeOrigin: true,
-  })
-);
 
 app.use(express.json()); // This is required to parse JSON requests
 
@@ -74,6 +67,14 @@ app.use(
     ],
     methods: ["GET", "POST", "PUT", "OPTIONS"], // Specify allowed methods
     allowedHeaders: ["Content-Type", "Authorization"], // Specify allowed headers
+  })
+);
+
+app.use(
+  "/api", // Adjust this path based on your needs
+  createProxyMiddleware({
+    target: "https://datahiver-production.up.railway.app", // Replace with the actual port of your React development server
+    changeOrigin: true,
   })
 );
 
